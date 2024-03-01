@@ -10,6 +10,17 @@ import java.time.LocalDateTime;
 @Entity
 public class Url {
 
+    public Url(long id, String originalUrl, String shortLink, LocalDateTime creationDate, LocalDateTime expirationDate) {
+        this.id = id;
+        this.originalUrl = originalUrl;
+        this.shortLink = shortLink;
+        this.creationDate = creationDate;
+        this.expirationDate = expirationDate;
+    }
+
+    public Url() {
+    }
+
     @Id
     @GeneratedValue
     private long id;
