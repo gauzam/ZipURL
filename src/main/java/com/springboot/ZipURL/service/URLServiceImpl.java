@@ -38,6 +38,10 @@ public class URLServiceImpl implements URLService{
             urlToPersist.setExpirationDate(getExpirationDate(urlDTO.getExpirationDate(), urlToPersist.getCreationDate()));
 
             Url UrlToReturn = persistShortLink(urlToPersist);
+
+            if(UrlToReturn != null){
+                return UrlToReturn;
+            }
         }
 
         return null;
@@ -47,6 +51,7 @@ public class URLServiceImpl implements URLService{
 
         if(StringUtils.isBlank(expirationDate)){
             //means user hasn't provided it
+            //we create expiration time of 5 mins
             return creationDate.plusSeconds(300);
         }
 
@@ -78,11 +83,15 @@ public class URLServiceImpl implements URLService{
 
     @Override
     public Url getEncodedUrl(String url) {
-        return null;
+
+        Url urlToReturn = urlRepository.findByShortLink(url);
+        return urlToReturn;
     }
 
     @Override
     public void deleteShortLink(Url url) {
+
+        urlRepository.delete(url);
 
     }
 }
