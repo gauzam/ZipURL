@@ -76,6 +76,7 @@ public class URLServiceImpl implements URLService{
     @Override
     public Url persistShortLink(Url url) {
 
+        //saving the url object into the h2 database
         Url urlToReturn = urlRepository.save(url);
         return urlToReturn;
 
@@ -84,6 +85,7 @@ public class URLServiceImpl implements URLService{
     @Override
     public Url getEncodedUrl(String url) {
 
+        //returning url object using just the short link
         Url urlToReturn = urlRepository.findByShortLink(url);
         return urlToReturn;
     }
